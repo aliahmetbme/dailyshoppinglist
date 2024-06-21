@@ -14,6 +14,7 @@
 		FE0157B12C1F49A5007DCF4C /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE0157AF2C1F49A5007DCF4C /* ShoppingList.xcdatamodeld */; };
 		FE0157B32C1F49A6007DCF4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE0157B22C1F49A6007DCF4C /* Assets.xcassets */; };
 		FE0157B62C1F49A6007DCF4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE0157B42C1F49A6007DCF4C /* LaunchScreen.storyboard */; };
+		FE10BFC72C262261004B9283 /* ProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE10BFC62C262261004B9283 /* ProductViewCell.swift */; };
 		FE7DCE3B2C25BC5A008B7216 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7DCE3A2C25BC5A008B7216 /* Item.swift */; };
 		FE7DCE3F2C25C2D0008B7216 /* AddingItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7DCE3E2C25C2D0008B7216 /* AddingItemController.swift */; };
 		FE7DCE422C26041E008B7216 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7DCE412C26041E008B7216 /* Enum.swift */; };
@@ -29,6 +30,7 @@
 		FE0157B22C1F49A6007DCF4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE0157B52C1F49A6007DCF4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE0157B72C1F49A6007DCF4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE10BFC62C262261004B9283 /* ProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewCell.swift; sourceTree = "<group>"; };
 		FE7DCE3A2C25BC5A008B7216 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FE7DCE3E2C25C2D0008B7216 /* AddingItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingItemController.swift; sourceTree = "<group>"; };
 		FE7DCE402C25E932008B7216 /* viewDidLayoutSubview.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = viewDidLayoutSubview.md; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				FE7DCE3E2C25C2D0008B7216 /* AddingItemController.swift */,
 				FE7DCE402C25E932008B7216 /* viewDidLayoutSubview.md */,
 				FE7DCE412C26041E008B7216 /* Enum.swift */,
+				FE10BFC62C262261004B9283 /* ProductViewCell.swift */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 				FE0157AB2C1F49A5007DCF4C /* ViewController.swift in Sources */,
 				FE0157B12C1F49A5007DCF4C /* ShoppingList.xcdatamodeld in Sources */,
 				FE7DCE3F2C25C2D0008B7216 /* AddingItemController.swift in Sources */,
+				FE10BFC72C262261004B9283 /* ProductViewCell.swift in Sources */,
 				FE7DCE422C26041E008B7216 /* Enum.swift in Sources */,
 				FE0157A72C1F49A5007DCF4C /* AppDelegate.swift in Sources */,
 				FE0157A92C1F49A5007DCF4C /* SceneDelegate.swift in Sources */,

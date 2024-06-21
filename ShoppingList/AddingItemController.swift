@@ -30,22 +30,13 @@ class AddingItemController: UIViewController, UIImagePickerControllerDelegate, U
         productimage.addGestureRecognizer(productimageGestureRecognizer)
 
     }
-    
-    func chooseSourceType ()  {
-
-
-    }
-
         
     @objc func takeImage (){
+
         let picker = UIImagePickerController()
-
         let alertController = UIAlertController(title: "Select Image Source", message: "", preferredStyle: .alert)
-
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
             
-            let picker = UIImagePickerController()
-
             picker.delegate = self
             picker.sourceType = .camera
             picker.allowsEditing = true
@@ -55,8 +46,6 @@ class AddingItemController: UIViewController, UIImagePickerControllerDelegate, U
         
         let gallarylAction = UIAlertAction(title: "Gallary", style: .cancel) { _ in
             
-            let picker = UIImagePickerController()
-
             picker.delegate = self
             picker.sourceType = .photoLibrary
             picker.allowsEditing = true
@@ -68,8 +57,7 @@ class AddingItemController: UIViewController, UIImagePickerControllerDelegate, U
         alertController.addAction(gallarylAction)
 
         present(alertController, animated: true, completion: nil)
-        
-        
+                
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -117,6 +105,9 @@ class AddingItemController: UIViewController, UIImagePickerControllerDelegate, U
             }
             try context.save()
             print("Başarılı")
+            
+            NotificationCenter.default.post(name: NSNotification.Name("productRegistirated"), object: nil)
+            self.navigationController?.popViewController(animated: true)
         } catch {
             print("hata var")
         }

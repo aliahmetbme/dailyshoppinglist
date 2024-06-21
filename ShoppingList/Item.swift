@@ -16,25 +16,29 @@ class Item {
     var volume:Double?
     var kilogram:Double?
     var image:UIImage
+    var id:UUID
         
-    init(name: String, cost: Double, piece: Int, image: UIImage) {
+    init(name: String, cost: Double, piece: Int, image: UIImage, id:UUID) {
         self.name = name
         self.cost = cost
         self.piece = piece
         self.image = image
+        self.id = id
     }
     
-    init(name: String, cost: Double, kilogram: Double, image: UIImage) {
+    init(name: String, cost: Double, kilogram: Double, image: UIImage, id:UUID) {
         self.name = name
         self.cost = cost
         self.kilogram = kilogram
         self.image = image
+        self.id = id
     }
     
-    init(name: String, cost: Double, volume: Double, image: UIImage) {
+    init(name: String, cost: Double, volume: Double, image: UIImage, id:UUID) {
         self.name = name
         self.cost = cost
         self.volume = volume
         self.image = image
+        self.id = id
     }
 }
