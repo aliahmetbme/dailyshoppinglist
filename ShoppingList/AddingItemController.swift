@@ -10,6 +10,7 @@ import CoreData
 
 class AddingItemController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet var navigation: UINavigationItem!
     @IBOutlet var amount: UITextField!
     @IBOutlet var cost: UITextField!
     @IBOutlet var productName: UITextField!
@@ -24,10 +25,20 @@ class AddingItemController: UIViewController, UIImagePickerControllerDelegate, U
         
         optionpickerview.delegate = self
         optionpickerview.dataSource = self
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigation.backButtonTitle = "Shopping List"
+        navigation.backBarButtonItem?.title = "Shopping List"
+        
         
         productimage.isUserInteractionEnabled = true
         let productimageGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(takeImage))
         productimage.addGestureRecognizer(productimageGestureRecognizer)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
 
     }
         
@@ -68,6 +79,7 @@ class AddingItemController: UIViewController, UIImagePickerControllerDelegate, U
    
     @IBAction func saveItem(_ sender: Any) {
         do {
+            
             let appdelegate =  UIApplication.shared.delegate as! AppDelegate
             let context = appdelegate.persistentContainer.viewContext
             
@@ -81,7 +93,6 @@ class AddingItemController: UIViewController, UIImagePickerControllerDelegate, U
             
             if let amount = Double(self.amount.text!) {
                 shopping.setValue(amount, forKey: "amount")
-                
             }
             
             // universal uniqe id
@@ -99,20 +110,49 @@ class AddingItemController: UIViewController, UIImagePickerControllerDelegate, U
                 shopping.setValue("Kilogram", forKey: "productmeasuretype")
             case .liter:
                 shopping.setValue("Liter", forKey: "productmeasuretype")
-            case .none:
-                // bir seçimde değişiklik olmazsa
-                shopping.setValue("Piece", forKey: "productmeasuretype")
+            default:
+                break
             }
             try context.save()
-            print("Başarılı")
             
             NotificationCenter.default.post(name: NSNotification.Name("productRegistirated"), object: nil)
             self.navigationController?.popViewController(animated: true)
+            
         } catch {
             print("hata var")
         }
         
     }
+        @objc func keyboardWillShow(_ notification: Notification) {
+            guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+            let keyboardHeight = keyboardFrame.height / (self.view.frame.size.height * 0.01)
+                    
+            UIView.animate(withDuration: 0.1) {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight)
+                self.navigationController?.navigationBar.isHidden = true
+            }
+        }
+
+        @objc func keyboardWillHide(_ notification: Notification) {
+            UIView.animate(withDuration: 0.1) {
+                self.view.transform = .identity
+                self.navigationController?.navigationBar.isHidden = false
+            }
+        }
+        
+        @objc func dismissKeyboard() {
+            view.endEditing(true)
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            view.endEditing(true)
+        }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        view.endEditing(true)
+
+    }
+    
 }
 
 extension AddingItemController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -128,6 +168,7 @@ extension AddingItemController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     // UIPickerViewDelegate Metodları
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         switch options[row] {
         case .kilogram:
             return "Kilogram"
@@ -144,25 +185,26 @@ extension AddingItemController: UIPickerViewDelegate, UIPickerViewDataSource {
         print("measure option : \(String(describing: measureOption))")
     }
     
-}
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        var title = ""
+        switch options[row] {
+        case .kilogram:
+            title = "Kilogram"
+        case .liter:
+            title =  "Liter"
+        case .piece:
+            title =  "Piece"
 
-/*
- override func viewDidLayoutSubviews() {
-       super.viewDidLayoutSubviews()
-       
-       // Ekran yüksekliğini alın
-       let screenHeight = UIScreen.main.bounds.height
-       let screenWidth = UIScreen.main.bounds.width
-       // Yeni yüksekliği hesaplayın (ekran yüksekliğinin %80'i)
-       let targetHeight = screenHeight * 0.1
-       let targetWidth = screenWidth * 0.18
-                
-       
-      // UIImageView'ın mevcut genişliği korunarak yüksekliği ayarlayın
-      productimage.frame.size.height = targetHeight
-      productimage.frame.size.width = targetWidth
-   }
- 
-*/
+        }
+        let color = UIColor.black // Örneğin sıradaki satıra göre renk değişimi
+            
+            let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: color,
+                .font: UIFont.systemFont(ofSize: 18) // Opsiyonel olarak font ayarı yapabilirsiniz
+            ]
+            
+        return NSAttributedString(string: title, attributes: attributes)
+    }
+}
 
 

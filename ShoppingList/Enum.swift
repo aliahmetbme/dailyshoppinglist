@@ -12,3 +12,9 @@ enum productMeasureType {
     case kilogram
     case liter
 }
+
+enum MeasureType: String {
+    case piece = "Piece"
+    case kilogram = "Kilogram"
+    case liter = "Liter"
+}

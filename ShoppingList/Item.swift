@@ -12,33 +12,19 @@ class Item {
 
     var name:String
     var cost:Double
-    var piece:Int?
-    var volume:Double?
-    var kilogram:Double?
+    var amount:Double?
     var image:UIImage
     var id:UUID
+    var measureType:productMeasureType
         
-    init(name: String, cost: Double, piece: Int, image: UIImage, id:UUID) {
+    
+    init(name: String, cost: Double, amount:Double, image: UIImage, id:UUID , measureType:productMeasureType) {
         self.name = name
         self.cost = cost
-        self.piece = piece
+        self.amount = amount
         self.image = image
         self.id = id
+        self.measureType = measureType
     }
     
-    init(name: String, cost: Double, kilogram: Double, image: UIImage, id:UUID) {
-        self.name = name
-        self.cost = cost
-        self.kilogram = kilogram
-        self.image = image
-        self.id = id
-    }
-    
-    init(name: String, cost: Double, volume: Double, image: UIImage, id:UUID) {
-        self.name = name
-        self.cost = cost
-        self.volume = volume
-        self.image = image
-        self.id = id
-    }
 }
